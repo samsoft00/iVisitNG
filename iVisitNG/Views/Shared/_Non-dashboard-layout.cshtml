@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+    <title>@ViewBag.Title - IVisit-NG Login</title>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <!-- endinject -->
+    <!-- Main Style  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+    <div class="sign-in-wrapper">
+        <div class="sign-container">
+            
+            @RenderBody()
+
+            <div class="text-center copyright-txt login-footer">
+                <small>BrandOne Technologies Limited - Copyright © @DateTime.Now.Year</small>
+            </div>
+        </div>
+    </div>
+    <!-- inject:js -->
+    <script src="~/js/site.min.js"></script>
+
+    <!-- endinject -->
+    <!-- Common Script   -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

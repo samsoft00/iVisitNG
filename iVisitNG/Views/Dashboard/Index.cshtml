@@ -1,0 +1,551 @@
+﻿@model iVisitNG.Models.ViewModels.AppointmentSchedulerViewModel
+
+@{
+    ViewBag.Title = "Today's Appointment";
+}
+
+@section TopHeader{
+    <button class="btn btn-sm btn-warning pull-right" id="startNewAppointment" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="icon-people"></i> New Appointment</button>
+}
+
+
+
+<!--states start-->
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <div class="panel short-states">
+            <div class="panel-title">
+                <h4> <span class="label label-danger pull-right">Total Visitors</span></h4>
+            </div>
+            <div class="panel-body">
+                <h1>@Model.stats.visitors</h1>
+                <div class="text-danger pull-right">53% <i class="fa fa-bolt"></i></div>
+                <small>Total Visitors</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel short-states">
+            <div class="panel-title">
+                <h4> <span class="label label-info pull-right">Registered Staffs</span></h4>
+            </div>
+            <div class="panel-body">
+                <h1>@Model.stats.staffs</h1>
+                <div class="text-info pull-right">65% <i class="fa fa-level-up"></i></div>
+                <small>Registered Staffs</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel short-states">
+            <div class="panel-title">
+                <h4> <span class="label label-warning pull-right">Awaiting Appointments</span></h4>
+            </div>
+            <div class="panel-body">
+                <h1>@Model.stats.appointment</h1>
+                <div class="text-warning pull-right">77% <i class="fa fa-level-down"></i></div>
+                <small>Awaiting Appointments</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="panel short-states">
+            <div class="panel-title">
+                <h4> <span class="label label-success pull-right">Zone/Tenants</span></h4>
+            </div>
+            <div class="panel-body">
+                <h1>@Model.stats.tenants</h1>
+                <div class="text-success pull-right">88% <i class="fa fa-level-up"></i></div>
+                <small>Zone/Tenants</small>
+            </div>
+        </div>
+    </div>
+</div>
+<!--states end-->
+
+@Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="appointment">
+                        <thead>
+                            <tr>
+                                <th><strong>Id</strong>
+                                <th><strong>Name</strong> </th>
+                                <th><strong>Phone #</strong> </th>
+                                <th><strong>Company</strong> </th>
+                                <th><strong>Purpose</strong> </th>
+                                <th><strong>Appointment Date</strong> </th>
+                                <th><strong>Status</strong> </th>
+                                <th><strong>Action</strong> </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-sm" id="calenderModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="calenderModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">New Appointment</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="steps" id="step-1">
+
+                    <div id="appointmentDateTime">
+
+                        <form id="scheduler" role="form">
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="visitorName" class="control-label">Enter the Visitor's Name</label>
+                                        <div class="typeahead__container">
+                                            <div class="typeahead__field">
+
+                                                <span class="typeahead__query">
+                                                    <input class="form-control js-typeahead"
+                                                           id="visitorName"
+                                                           name="visitorName"
+                                                           type="search"
+                                                           placeholder="Enter Visitor's Last Name"
+                                                           autofocus
+                                                           autocomplete="off">
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="date_timepicker_start" class="control-label">Date From</label>
+                                        <input class="form-control" name="start_date" id="date_timepicker_start" placeholder="Please select date from" type="text" onkeydown="return false;" required autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="date_timepicker_end" class="control-label">Date To</label>
+                                        <input class="form-control" name="end_date" id="date_timepicker_end" placeholder="Please select date to" type="text" onkeydown="return false;" required autocomplete="off">
+                                    </div>
+                                </div>
+                                <!-- IsGroupVisit -->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Is Group Visit</label>
+                                        <div class="radio">
+                                            <label class="radio-inline"> <input type="radio" name="isGroupVisit" id="YesIsGroupVisit" value="Yes"> Yes</label>
+                                            <label class="radio-inline"> <input type="radio" name="isGroupVisit" id="NoGroupVisit" value="No" checked> No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Floor Number -->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="floorNumber" class="control-label">Floor Number</label>
+                                        <input class="form-control" name="floorNumber" id="floorNumber" placeholder="Floor number" type="text" required>
+                                    </div>
+                                </div>
+                                <!-- Purpose Of Visit -->
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Purpose, new { @class = "control-label" })
+                                        @Html.DropDownListFor(m => m.Purpose, new SelectList(Model.PurposeOfVisit, "Id", "purpose"), "- Select Purpose -", new { @class = "form-control", @id = "PurposeOfVisit", required = (string)null })
+                                    </div>
+                                </div>
+
+                                <!-- Instruction To Security -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="instruction" class="control-label">Instruction To Security</label>
+                                        <textarea class="form-control" id="instruction" name="instruction"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <button class="btn btn-success pull-right" id="scheduleAppointment"><i class="icon-clock"></i> Schedule Appointment</button>
+                                    <input name="staff" value="@ViewData["userId"]" id="staffId" type="hidden" />
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="steps" id="step-2" style="display: none">
+                    <header class="">
+                        <button class="btn btn-link pull-right" id="backToPrevious" data-section="step-1"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                        <strong>Add Visitor</strong>
+                    </header>
+                    <hr />
+                    <h4>Select Visitor</h4>
+                    <form>
+                        <div class="form-group">
+
+                            <select name="DaysOfWeek" id="DaysOfWeek" class="form-control">
+                                <option value="0">Select Day</option>
+                                <option value="1">Oyewole Abayomi Samuel - CBC Emea Limited, Lekki - Nigeria</option>
+                                <option value="2">Popoola Johnson</option>
+                                <option value="3">Victor</option>
+                                <option value="4">Russell Sell</option>
+                                <option value="5">Kayode Oyinlola</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <div class="pull-right">
+                                <button class="btn btn-danger">Book Appointment <i class="fa fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div id="createNewVisitor">
+                        <button class="btn btn-default" id="createVisitor">Create New Visitor</button>
+                    </div>
+                    <hr />
+
+                    <!-- Visitor Registration Form-->
+                    <form class="form-horizontal" role="form" id="visitorForm" style="display: none">
+                        <div class="roww">
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="firstName" class="control-label">First Name</label>
+                                    <input class="form-control" name="firstName" id="firstName" placeholder="Enter First Name" type="text">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="lastName" class="control-label">Last Name</label>
+                                    <input class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="phoneNumber" class="control-label">Phone Number</label>
+                                    <input class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Enter Phone Number" type="text">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="emailAddress" class="control-label">Email Address</label>
+                                    <input class="form-control" name="emailAddress" id="emailAddress" placeholder="Enter Email Address" type="email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="company" class="control-label">Company</label>
+                                    <input class="form-control" name="company" id="company" placeholder="Enter Company Name" type="text">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <label for="category" class="control-label">Select Category</label>
+                                    <select name="category" id="category" class="form-control">
+                                        <option value="0">Select Category</option>
+                                        <option value="1">Oyewole Abayomi Samuel</option>
+                                        <option value="2">Popoola Johnson</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="country" class="control-label">Select Country</label>
+                                    <select name="country" id="country" class="form-control">
+                                        <option value="0">Select Country</option>
+                                        <option value="1">Nigeria</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success" id="uploadNewVisitor">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $("#appointment").DataTable({
+                ajax: {
+                    url: "/api/appointment",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "Id",
+                        render: function (data, type, appointment) {
+                            //console.log(appointment);
+                            return "<a href='/appointment/edit/" + appointment.id + "'>" + appointment.refNumber + "</a>";
+                        }
+                    },
+                    {
+                        data: "Name",
+                        render: function (data, type, appointment) {
+                            return "<a href='/appointment/edit/" + appointment.id + "'>" + appointment.firstName + " " + appointment.lastName + "</a>";
+                        }
+                    },
+                    {
+                        data: "phoneNumber"
+                    },
+                    {
+                        data: "company"
+                    },
+                    {
+                        data: "purpose"
+                    },
+                    {
+                        data: "AppointmentDate",
+                        render: function (data, type, appointment) {
+                            return " - ";
+                        }
+                    },
+                    {
+                        data: "approvedStatus",
+                        render: function (data, type, appointment) {
+                            return appointment.approvedStatus == true ? "<span class='label label-success'>Approved</span>" : "<span class='label label-warning'>Waiting Approval</span>";
+                        }
+                    },
+                    {
+                        data: "Idx",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-customer-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#customers").on("click",
+                ".js-delete",
+                function () {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this customer?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/customers/" + button.attr("data-customer-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+                });
+
+            $('#date_timepicker_start').datetimepicker({
+                format: 'Y-m-d h:m:s',
+                onGenerate: function (ct) {
+                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+                        .addClass('xdsoft_disabled');
+                },
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                    });
+                }
+            });
+
+            $('#date_timepicker_end').datetimepicker({
+                format: 'Y-m-d h:m:s',
+                onGenerate: function (ct) {
+                    jQuery(this).find('.xdsoft_date.xdsoft_weekend')
+                        .addClass('xdsoft_disabled');
+                },
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val()
+                            ? jQuery('#date_timepicker_start').val()
+                            : false
+                    });
+                }
+            });
+
+            $('#scheduleAppointment').on('click',
+                function (e) {
+
+                    $('#scheduler').validate({
+                        rules: {
+                            customer: "required",
+                            visitorName: {
+                                required: true
+                            },
+                            start_date: {
+                                required: true
+                            },
+                            end_date: {
+                                required: true
+                            },
+                            isGroupVisit: {
+                                required: true
+                            },
+                            floorNumber: {
+                                required: true
+                            },
+                            PurposeOfVisit: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            visitorName: "Enter Visitor's Reference Number",
+                            start_date: "Please enter Start Date",
+                            end_date: "Please enter End Date",
+                            isGroupVisit: "Is Group visit?",
+                            floorNumber: "Select Floor Number",
+                            PurposeOfVisit: "Purpose of Visit please?"
+                        },
+                        submitHandler: function () {
+                            //Do you thing here
+
+                            var data = {
+                                "VisitorRef": $('#visitorName').val(),
+                                "StartDate": $('#date_timepicker_start').val(),
+                                "EndDate": $('#date_timepicker_end').val(),
+                                "IsGroupVisit": $("form input[type='radio']:checked").val(),
+                                "FloorNumber": $('#floorNumber').val(),
+                                "PurposeOfVisit": $('#PurposeOfVisit').val(),
+                                "Instruction": $('#instruction').val(),
+                                "StaffId": $('#staffId').val()
+                            };
+
+                            console.log(data);
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/api/appointment/assign",
+                                data: data,
+                                dataType: "json",
+                                beforeSend: function () {
+                                    // setting a timeout
+                                    $("#scheduleAppointment").attr("disabled", "disabled");
+                                },
+                                success: function (done) {
+                                    if (done) {
+                                        location.reload();
+                                        return;
+                                    }
+                                    $("#scheduleAppointment").attr("enabled", "enabled");
+                                },
+                                error: function (xhr) { // if error occured
+                                    alert("Error occured.please try again");
+                                }
+                            });
+
+                        },
+                    });
+
+                });
+
+            //Display Modal for booking
+            $("#startNewAppointment").on("click",
+                function () {
+
+                    var dialog = $('#calenderModal');
+
+                    dialog.on('show.bs.modal',
+                        function (event) {
+
+                            var date = new Date();
+                            var d = date.getDate();
+                            var m = date.getMonth();
+                            var y = date.getFullYear();
+
+                        });
+
+                });
+
+
+            $('#scheduler').on('submit',
+                function (e) {
+                    e.preventDefault();
+
+                    var dateTimeArray = [];
+
+                    var startDate = $('input[name="start_date"]').val(),
+                        endDate = $('input[name="end_date"]').val(),
+                        dayOfWeek = $('#DaysOfWeek').val();
+
+                    if (startDate == "") {
+
+                    } else if (endDate == "") {
+
+                    } else if (dayOfWeek == "" || typeof dayOfWeek == "undefined" || dayOfWeek == 0) {
+
+                    } else {
+                        var appointMentDate = {
+                            startDate: startDate,
+                            endDate: endDate,
+                            day: dayOfWeek
+                        }
+                        dateTimeArray.push(appointMentDate);
+
+                        console.log(dateTimeArray);
+
+                        $('#step-1').hide("slide", { direction: "left" }, 250);
+                        $('#step-2').delay(250).show("slide", { direction: "right" }, 500);
+
+                    }
+
+                });
+
+            $('#createVisitor').on('click',
+                function () {
+                    $('#visitorForm').slideToggle('fast',
+                        function () {
+                            $(this).niceScroll({
+                                height: '250px',
+                                cursorcolor: "#62549a",
+                                autohidemode: false,
+                                horizrailenabled: false
+                            });
+                        });
+                });
+
+            $('#backToPrevious').on('click',
+                function (e) {
+                    var goTo = $(this).data('section');
+                    var fromWhere = $(this).closest('.steps').attr('id');
+
+                    $('#' + fromWhere).hide("slide", { direction: "right" }, 250);
+                    $('#' + goTo).delay(250).show("slide", { direction: "left" }, 500);
+                });
+
+        });
+    </script>
+
+}

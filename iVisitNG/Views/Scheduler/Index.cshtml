@@ -1,0 +1,77 @@
+﻿@model IEnumerable<iVisitNG.Models.BusySchedule>
+
+@{
+    ViewData["Title"] = "My Busy Schedule";
+}
+
+
+@section TopHeader{
+    <button class="btn btn-success pull-right" id="startNewAppointment" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="icon-people"></i> New Appointment</button>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <div class="panel-body">
+                <div class="table-responsive">
+
+                    <table class="table table-striped" id="schedule">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Reason)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FromDateTime)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ToDateTime)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CreatedDate)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ReasonText)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FromDateTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ToDateTime)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#schedule").DataTable();
+        });
+    </script>
+
+}

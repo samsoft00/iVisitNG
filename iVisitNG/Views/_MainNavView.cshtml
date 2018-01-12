@@ -1,0 +1,18 @@
+﻿@using iVisitNG.Models
+@using iVisitNG.Views
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<Staff> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<li class="@MainNav.IndexNavClass(ViewContext)"><a asp-action="Index">Dashboard</a></li>
+<li class="@MainNav.ChangePasswordNavClass(ViewContext)"><a asp-action="ChangePassword">Password</a></li>
+<li>
+    <a href=""><i class="fa fa-home"></i><span>Dashboard</span><i class="fa fa-angle-right pull-right"></i></a>
+    <ul class="nav nav-sub">
+        <li class="nav-sub-header"><a href=""><span>Dashboard</span></a></li>
+        <li><a href="#"><span>Dashboard 1</span></a></li>
+    </ul>
+</li>

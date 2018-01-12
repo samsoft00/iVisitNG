@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Http
+
+@{
+    ViewBag.Title = "My Calender";
+}
+
+@section TopHeader{
+    <button class="btn btn-success pull-right" id="startNewAppointment" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="icon-people"></i> New Appointment</button>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <div class="panel-body">
+
+                <div id="calendar"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+            $("#calendar").fullCalendar();
+
+            function GenerateCalender(events) {
+                
+                //debugger;
+                /*
+                $("#calendar").fullCalendar("destroy");
+                $("#calendar").fullCalendar({
+                        contentHeight: 400,
+                        defaultDate: new Date(),
+                        timeFormat: 'h(:mm )a',
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,basicWeek,basicDay,agenda'
+                        },
+                        eventLimit: true,
+                        eventColor: '#378006',
+                        events: events,
+                        eventClick: function(calEvent, jsEvent, view) {
+                            selectedEvent = calEvent;
+                            $('#myModal #eventTitle').text('Staff Busy Schedule');
+                            var $description = $('<div/>');
+                            if (calEvent.end != null) {
+                                var staffName = 'Name';
+                                $description.append($('<p/>').html('<b>Staff Name:</b> ' + staffName));
+                                $description.append($('<p/>').html('<b>Busy Start At:</b> ' +
+                                    calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                                $description.append($('<p/>').html('<b>Busy End At:</b> ' +
+                                    calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                                $description.append($('<p/>').html('<b>Reason:</b> ' + calEvent.title));
+                                $('#myModal #pDetails').empty().html($description);
+                                $('#myModal').modal();
+                            } else if (calEvent.allDay == false) {
+                                var name = 'Name';
+                                selectedEvent = calEvent;
+                                $('#myModal #eventTitle').text('Appointment Schedule');
+                                var $description = $('<div/>');
+                                $description.append($('<p/>').html('<b>Staff Name:</b> ' + name));
+                                $description.append($('<p/>').html('<b>Visitor Name:</b> ' + calEvent.title));
+                                $description.append($('<p/>').html('<b>Appointment DateTime:</b> ' +
+                                    calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                                $('#myModal #pDetails').empty().html($description);
+                                $('#myModal').modal();
+
+                            }
+
+                        }
+                    }
+                ) */
+            }
+        });
+</script>
+
+}

@@ -1,0 +1,58 @@
+﻿body {
+}
+
+div.login-footer{ padding-top: 5% }
+.sign-in-wrapper .sign-container .copyright-txt { bottom: -50px; }
+.sign-in-wrapper { padding-top: 5%; }
+.sign-in-form .form-control {
+    height: 40px;
+    font-size: 16px;
+}
+.sign-in-wrapper .sign-container {
+    max-width: 390px;
+}
+
+.panel-heading {
+    padding: 20px 15px;
+}
+label {
+    margin-bottom: 5px !important
+}
+#visitorForm {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+.fc-row {
+    margin-right: 0px !important
+}
+
+.fc-scroller {
+    overflow-y: hidden !important;
+    /*height: 350px !important*/
+}
+.panel-border-top-success {
+    border-top: 2px solid #337ab7;
+    border-radius: 0px;
+}
+
+.panel-border-top-danger {
+    border-top: 2px solid #337ab7;
+    border-radius: 0px;
+}
+#appodintmentDateTime {
+    background-color: #F9F9F9;
+    padding: 10px;
+}
+headedr.form-titlex {
+    padding: 10px 0px;
+    border-bottom: 1px solid lightgray;
+}
+.form-control {
+    border-radius: 0px;
+    height: 40px;
+}
+.form-horizontal .control-label {
+    text-align: left
+}

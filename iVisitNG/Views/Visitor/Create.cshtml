@@ -1,0 +1,105 @@
+﻿@model iVisitNG.Models.ViewModels.VisitorRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Register New Visitor";
+}
+
+@section TopHeader{
+    <button class="btn btn-success pull-right" id="startNewAppointment" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="icon-people"></i> New Appointment</button>
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <header class="panel-heading panel-border">
+                Register New Visitor
+            </header>
+
+            <div class="panel-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="control-label"></label>
+                                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="LastName" class="control-label"></label>
+                                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PhoneNumber" class="control-label"></label>
+                                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- Text input-->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="Email Address" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Category" class="control-label"></label>
+                                <select class="form-control" asp-for="Category" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                                    <option>-Please select Category-</option>
+                                </select>
+                                <span asp-validation-for="Category" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Country" class="control-label"></label>
+                                <select class="form-control" asp-for="Country" asp-items="@(new SelectList(Model.Countries, "Id", "Name"))">
+                                    <option>-Please select Country-</option>
+                                </select>
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Company" class="control-label"></label>
+                                <input asp-for="Company" class="form-control" placeholder="Company Name" />
+                                <span asp-validation-for="Company" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="OfficeAddress" class="control-label"></label>
+                                <input asp-for="OfficeAddress" class="form-control" placeholder="Company Address" />
+                                <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

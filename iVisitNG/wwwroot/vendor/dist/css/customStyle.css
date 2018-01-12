@@ -1,0 +1,179 @@
+﻿body {
+}
+
+div.login-footer{ padding-top: 5% }
+.sign-in-wrapper .sign-container .copyright-txt { bottom: -50px; }
+.sign-in-wrapper { padding-top: 5%; }
+.sign-in-form .form-control {
+    height: 40px;
+    font-size: 16px;
+}
+.sign-in-wrapper .sign-container {
+    max-width: 390px;
+}
+
+.panel-heading {
+    padding: 20px 15px;
+}
+label {
+    margin-bottom: 5px !important
+}
+#visitorForm {
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden
+}
+
+.fc-row {
+    margin-right: 0px !important
+}
+
+.fc-scroller {
+    overflow-y: hidden !important;
+    /*height: 350px !important*/
+}
+.panel-border-top-success {
+    border-top: 2px solid #337ab7;
+    border-radius: 0px;
+}
+
+.panel-border-top-danger {
+    border-top: 2px solid #337ab7;
+    border-radius: 0px;
+}
+#appodintmentDateTime {
+    background-color: #F9F9F9;
+    padding: 10px;
+}
+headedr.form-titlex {
+    padding: 10px 0px;
+    border-bottom: 1px solid lightgray;
+}
+.form-control {
+    border-radius: 0px;
+    /*height: 40px;*/
+}
+.form-horizontal .control-label {
+    text-align: left
+}
+
+
+.twPc-div {
+    background: #fff none repeat scroll 0 0;
+ 
+}
+
+.twPc-bg {
+    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-bottom: 1px solid #e1e8ed;
+    height: 100px;
+    width: 100%;
+}
+
+#visitorModal {
+    padding: 0px;
+}
+
+.twPc-block {
+    display: block !important;
+}
+
+.twPc-button {
+    margin: -50px -17px 0;
+    text-align: right;
+    width: 100%;
+}
+
+.twPc-avatarLink {
+    background-color: #fff;
+    border-radius: 6px;
+    display: inline-block !important;
+    float: left;
+    margin: -30px 5px 11px 20px;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+
+.twPc-avatarImg {
+    border: 2px solid #fff;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #fff;
+    height: 180px;
+    width: auto;
+}
+
+.twPc-divUser {
+    margin: 20px 0 0;
+}
+
+.twPc-divName {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+
+    .twPc-divName a {
+        color: inherit !important;
+    }
+
+.twPc-divStats {
+    margin: 5px 22px;
+    padding: 10px 0;
+}
+
+.twPc-Arrange {
+    box-sizing: border-box;
+    display: table;
+    margin: 0;
+    min-width: 100%;
+    padding: 0;
+    table-layout: auto;
+}
+
+ul.twPc-Arrange {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+.twPc-ArrangeSizeFit {
+    display: table-cell;
+    padding: 0;
+    vertical-align: top;
+}
+
+    .twPc-ArrangeSizeFit a:hover {
+        text-decoration: none;
+    }
+
+.twPc-StatValue {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out 0s;
+}
+
+.twPc-StatLabel {
+    color: #8899a6;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: color 0.15s ease-in-out 0s;
+}
+
+/**
+    Page head wrapper
+*/
+div.page-head-wrap {
+    background: url("../../../images/index-bg.png");
+    background-repeat: repeat-x;
+}
+
+div.page-head-wrap h4 {
+    color: #ffffff;
+}

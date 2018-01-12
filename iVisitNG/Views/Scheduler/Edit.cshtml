@@ -1,0 +1,90 @@
+﻿@model iVisitNG.Models.ViewModels.SchedulerFormModal
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@section TopHeader{
+    <a class="btn btn-success pull-right" asp-action="Index"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Busy Schedule List</a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <header class="panel-heading panel-border">
+                @ViewData["Title"] Schedule
+            </header>
+
+            <div class="panel-body">
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Reason" class="control-label"></label>
+                        <textarea asp-for="Reason" class="form-control" id="reasonNote"></textarea>
+                        <span asp-validation-for="Reason" class="text-danger"></span>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="FromDateTime" class="control-label"></label>
+                            <input asp-for="FromDateTime" class="form-control" id="date_timepicker_start" onkeydown="return false;" placeholder="Select To Date and Time" autocomplete="off" />
+                            <span asp-validation-for="FromDateTime" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="ToDateTime" class="control-label"></label>
+                            <input asp-for="ToDateTime" class="form-control" id="date_timepicker_end" onkeydown="return false;" placeholder="Select From Date and Time" autocomplete="off" />
+                            <span asp-validation-for="ToDateTime" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            $('#date_timepicker_start').datetimepicker({
+                format: 'Y-m-d h:m:s',
+                onGenerate: function (ct) {
+                    jQuery(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+                },
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false,
+                        defaultDate: new Date()
+                    });
+                }
+            });
+
+            $('#date_timepicker_end').datetimepicker({
+                format: 'Y-m-d h:m:s',
+                onGenerate: function (ct) {
+                    jQuery(this).find('.xdsoft_date.xdsoft_weekend').addClass('xdsoft_disabled');
+                },
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                    });
+                }
+            });
+
+            $('#reasonNote').summernote({
+                height: 100,
+                placeholder: 'What, When, Why.. Enter your reason',
+            });
+
+        });
+    </script>
+}

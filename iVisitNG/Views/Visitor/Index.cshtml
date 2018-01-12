@@ -1,0 +1,212 @@
+﻿@model IEnumerable<iVisitNG.Models.Visitor>
+
+@{
+    ViewData["Title"] = "Visitors List";
+}
+
+
+@section TopHeader{
+    <a class="btn btn-success pull-right" asp-action="Create">Add New Visitor</a>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+
+            <header class="panel-heading panel-border">
+                Visitors
+            </header>
+
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="visitor">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.RefNumber)</th>
+                                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                                <th>@Html.DisplayNameFor(model => model.Company)</th>
+                                <th><strong></strong> </th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade bs-example-modal-sm" id="visitorQuickDetailsModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="calenderModalLabel">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body" id="visitorModal">
+                <!-- code start -->
+                <div class="twPc-div">
+                    <a class="twPc-bg twPc-block">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding:5px 10px">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </a>
+                    <div>
+                        <div class="twPc-button">
+                            <a href="#" class="btn btn-success" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true">More Details </a>
+                            <!-- Twitter Button -->
+                        </div>
+                        <a title="Mert Salih Kaplan" href="#" class="twPc-avatarLink">
+                            <img alt="Mert Salih Kaplan" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" class="twPc-avatarImg">
+                        </a>
+                        <div class="twPc-divUser">
+                            <div class="twPc-divName">
+                                <a href="javascript:;">Mert S. Kaplan</a>
+                            </div>
+                            <span>
+                                <a href="javascript:;"><span>mertskaplan</span></a>
+                            </span>
+                        </div>
+                        <div class="twPc-divStats">
+                            <ul class="twPc-Arrange">
+
+                                <li class="twPc-ArrangeSizeFit">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-check-square-o" aria-hidden="true"></i> Recent Check-Ins</a></li>
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-contentn">
+                                        <div role="tabpanel" class="tab-pane active" id="home">
+
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Staff</th>
+                                                        <th>Floor</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Mark</td>
+                                                        <td>Otto</td>
+                                                        <td>Otto</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Jacob</td>
+                                                        <td>Thornton</td>
+                                                        <td>Thornton</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- code end -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#visitor").DataTable({
+                ajax: {
+                    url: "/api/visitors",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "refNumber",
+                        render: function (data, type, visitor) {
+                            return "<button class='btn btn-link js-view' data-visitor-id='" + visitor.id + "'>3838383</button>";
+                        }
+                    },
+                    {
+                        data: "firstName"
+                    },
+                    {
+                        data: "lastName"
+                    },
+                    {
+                        data: "phoneNumber"
+                    },
+                    {
+                        data: "company"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn btn-sm btn-primary js-delete' data-customer-id=" +
+                                data +
+                                ">Report Visitor</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#visitor").on("click", ".js-view", function (e) {
+
+                var $this = $(this),
+                    visitorRef = $this.data('visitor-id'),
+                    dialog = $("#visitorQuickDetailsModal");
+
+                dialog.modal('show');
+                dialog.on('show.bs.modal',
+                    function (event) {
+                        console.log($this);
+                    });
+
+            });
+
+
+            $("#customers").on("click",
+                ".js-report",
+                function () {
+                    var button = $(this);
+
+                    bootbox.confirm("Are you sure you want to delete this customer?",
+                        function (result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/visitor/" + button.attr("data-customer-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
+                        });
+                });
+
+            //Display Modal for booking
+            $(".viewVisitorDetailsuuu").on("click",
+                function () {
+                    var $this = $(this);
+                    console.log($this);
+
+                    dialog.on('show.bs.modal',
+                        function (event) {
+                            console.log($this);
+                        });
+
+                });
+
+        });
+    </script>
+
+}

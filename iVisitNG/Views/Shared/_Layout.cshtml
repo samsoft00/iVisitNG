@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+    <title>@ViewData["Title"] - iVisitNG</title>
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <!-- endinject -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.print.css" type="text/css" media="print" />
+
+    @RenderSection("styles", required: false)
+    <!-- Main Style  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+</head>
+<body>
+<div id="ui" class="ui">
+<!--header start-->
+<header id="header" class="ui-header">
+    <div class="navbar-header">
+        <!--logo start-->
+        <a href="" class="navbar-brand">
+            <span class="logo"><img src="~/Content/vendor/img/ivisit-logo.png" alt="" /></span>
+            <span class="logo-compact"><img src="~/Content/vendor/img/ivisit-logo.png" alt="" /></span>
+        </a>
+        <!--logo end-->
+    </div>
+    <div class="search-dropdown dropdown pull-right visible-xs">
+        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-search"></i></button>
+        <div class="dropdown-menu">
+            <form action="">
+                <input class="form-control" placeholder="Search here..." type="text">
+            </form>
+        </div>
+    </div>
+    <div class="navbar-collapse nav-responsive-disabled">
+        <!--toggle buttons start-->
+        <ul class="nav navbar-nav">
+            <li>
+                <a class="toggle-btn" data-toggle="ui-nav" href="">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- toggle buttons end -->
+        <!--search start-->
+        <form class="search-content hidden-xs" action="">
+            <button type="submit" name="search" class="btn srch-btn">
+                <i class="fa fa-search"></i>
+            </button>
+            <input type="text" class="form-control" name="keyword" placeholder="Search here...">
+        </form>
+        <!--search end-->
+        <!--notification start-->
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge">5</span>
+                </a>
+                <!--dropdown -->
+                <ul class="dropdown-menu dropdown-menu--responsive">
+                    <div class="dropdown-header">Messages (12)</div>
+                    <ul class="Message-list niceScroll list-group">
+                        <li class="Message list-group-item">
+                            <button class="Message__status Message__status--read" type="button" name="button"></button>
+                            <a href="">
+                                <div class="Message__avatar Message__avatar--danger pull-left" href="">
+                                    <img src="~/Content/vendor/img/a2.jpg" alt="...">
+                                </div>
+                                <div class="Message__highlight">
+                                    <span class="Message__highlight-name">Lubida Teresa</span>
+                                    <p class="Message__highlight-excerpt">Hello there! Can you send me a photo please?</p>
+                                    <p class="Message__highlight-time">1 hour ago</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="dropdown-footer"><a href="">View more</a></div>
+                </ul>
+                <!--/ dropdown -->
+            </li>
+
+            <li class="dropdown dropdown-usermenu">
+                <a href="#" class=" dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <div class="user-avatar"><img src="~/Content/vendor/img/a0.jpg" alt="..."></div>
+                    <span class="hidden-sm hidden-xs"> Samsoft </span>
+                    <!--<i class="fa fa-angle-down"></i>-->
+                    <span class="caret hidden-sm hidden-xs"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                    <li><a href="#"><i class="fa fa-cogs"></i>  Settings</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>  Profile</a></li>
+                    <li><a href="#"><i class="fa fa-commenting-o"></i>  Feedback</a></li>
+                    <li><a href="#"><i class="fa fa-life-ring"></i>  Help</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> Log Out</a></li>
+
+                </ul>
+
+            </li>
+            <li>
+                <a data-toggle="ui-aside-right" href=""><i class="glyphicon glyphicon-option-vertical"></i></a>
+            </li>
+        </ul>
+        <!--notification end-->
+    </div>
+</header>
+<!--header end-->
+    
+<!--sidebar start-->
+<aside id="aside" class="ui-aside">
+    <ul class="nav" ui-nav>
+        <li class="nav-head">
+            <h5 class="nav-title text-uppercase light-txt">Navigation</h5>
+        </li>
+        <li class="active"><a href=""><i class="fa fa-tachometer" aria-hidden="true"></i><span>Dashboard</span></a></li>
+        <li><a href=""><i class="fa fa-home"></i><span>Host/Staff</span></a></li>
+
+        <li>
+            <a href=""><i class="fa fa-user-circle-o" aria-hidden="true"></i><span>Visitors</span><i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="nav nav-sub">
+                <li class="nav-sub-header"><a href=""><span>Visitors</span></a></li>
+                <li class=""><a href=""><span>Visitor's List</span></a></li>
+                <li class=""><a href=""><span>Add Visitors</span></a></li>
+                <li class=""><a href=""><span>Blacklisted Visitors</span></a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href=""><i class="fa fa-calendar" aria-hidden="true"></i><span>Schedule</span><i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="nav nav-sub">
+                <li class="nav-sub-header"><a href=""><span>Schedule</span></a></li>
+                <li class=""><a href=""><span>Busy Schedule</span></a></li>
+                <li class=""><a href=""><span>My Calender</span></a></li>
+            </ul>
+        </li>
+
+        <li><a href=""><i class="fa fa-users" aria-hidden="true"></i><span>Manage Staffs</span></a> </li>
+        <li><a href=""><i class="fa fa-car" aria-hidden="true"></i><span>Vehicle Entry Permit</span></a></li>
+        <li><a href=""><i class="fa fa-bug" aria-hidden="true"></i><span>Reports</span></a></li>
+        <li><a href=""><i class="fa fa-bell-o" aria-hidden="true"></i><span>Emergency SMS Alert</span></a></li>
+        <li><a href=""><i class="fa fa-user" aria-hidden="true"></i><span>Profile</span></a></li>
+        <li>
+            <a href=""><i class="fa fa-cog" aria-hidden="true"></i><span>iVisitNG Configuration</span><i class="fa fa-angle-right pull-right"></i></a>
+            <ul class="nav nav-sub">
+                <li class="nav-sub-header"><a href=""><span>iVisitNG Configuration</span></a></li>
+                <li class=""><a href=""><span>Purpose of Visit</span></a></li>
+                <li class=""><a href=""><span>Division</span></a></li>
+                <li class=""><a href=""><span>Category</span></a></li>
+                <li class=""><a href=""><span>Zonal Office</span></a></li>
+            </ul>
+        </li>
+        <li><a href=""><i class="fa fa-sliders" aria-hidden="true"></i><span>Settings</span></a></li>
+
+    </ul>
+</aside>
+<!--sidebar end-->
+    
+<!--main content start-->
+<div id="content" class="ui-content ui-content-aside-overlay">
+
+    <div class="page-head-wrap">
+        @RenderSection("TopHeader", required: false)
+        <h4 class="margin0">
+            @ViewData["title"]
+        </h4>
+    </div>
+
+    <div class="ui-content-body">
+        <div class="ui-container">
+
+            @RenderBody()
+
+        </div>
+
+        <!--right side widget start-->
+        <div class="ui-aside-right " ui-aside-right>
+            <!--customer start-->
+            <div class="aside-widget">
+                <h5>Recent Visitors</h5>
+                <ul class="contact-list">
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="~/Content/vendor/img/a0.jpg" class="media-object">
+                                <span class="online"></span>
+                            </a>
+                            <div class="media-body">
+                                <strong>John Doe</strong>
+                                <small>General Manager at TB</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="~/Content/vendor/img/a1.jpg" class="media-object">
+                                <span class="offline"></span>
+                            </a>
+                            <div class="media-body">
+                                <strong>Jonathan Smith</strong>
+                                <small>Lead Designer</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="~/Content/vendor/img/a2.jpg" class="media-object">
+                                <span class="busy"></span>
+                            </a>
+                            <div class="media-body">
+                                <strong>Margarita Rose</strong>
+                                <small>Human Resource Manager</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="~/Content/vendor/img/a0.jpg" class="media-object">
+                                <span class="away"></span>
+                            </a>
+                            <div class="media-body">
+                                <strong>Mr. Kameron De</strong>
+                                <small>Marketing Officer</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                    <li class="online">
+                        <div class="media">
+                            <a href="#" class="pull-left media-thumb">
+                                <img alt="" src="~/Content/vendor/img/a2.jpg" class="media-object">
+                                <span class="offline"></span>
+                            </a>
+                            <div class="media-body">
+                                <strong>Mr. Mosa</strong>
+                                <small>Development Manager</small>
+                            </div>
+                        </div><!-- media -->
+                    </li>
+                </ul>
+            </div>
+            <!--customer end-->
+
+        </div>
+        <!--right side widget end-->
+
+    </div>
+
+</div>
+<!--main content end-->
+<!--footer start-->
+<div id="footer" class="ui-footer">
+    @DateTime.Now.Year &copy; BrandOne Technologies Limited.
+</div>
+<!--footer end-->
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <!-- inject:js -->
+    <script src="~/js/site.min.js"></script>
+    
+    <!-- endinject -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.js"></script>
+
+    <!-- Common Script   -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
