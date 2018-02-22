@@ -8,62 +8,83 @@
     <button class="btn btn-sm btn-warning pull-right" id="startNewAppointment" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="icon-people"></i> New Appointment</button>
 }
 
+@if (User.IsInRole("Admin"))
+{
+    <!--states start-->
+    <div class="row">
+        <div class="col-md-3 col-sm-6">
+            <div class="panel short-states">
+                <div class="panel-title">
+                    <h4> <span class="label label-danger pull-right">Total Visitors</span></h4>
+                </div>
+                <div class="panel-body">
+                    <h1>@Model.stats.visitors</h1>
+                    <div class="text-danger pull-right">53% <i class="fa fa-bolt"></i></div>
+                    <small>Total Visitors</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="panel short-states">
+                <div class="panel-title">
+                    <h4> <span class="label label-info pull-right">Registered Staffs</span></h4>
+                </div>
+                <div class="panel-body">
+                    <h1>@Model.stats.staffs</h1>
+                    <div class="text-info pull-right">65% <i class="fa fa-level-up"></i></div>
+                    <small>Registered Staffs</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="panel short-states">
+                <div class="panel-title">
+                    <h4> <span class="label label-warning pull-right">Awaiting Appointments</span></h4>
+                </div>
+                <div class="panel-body">
+                    <h1>@Model.stats.appointment</h1>
+                    <div class="text-warning pull-right">77% <i class="fa fa-level-down"></i></div>
+                    <small>Awaiting Appointments</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="panel short-states">
+                <div class="panel-title">
+                    <h4> <span class="label label-success pull-right">Zone/Tenants</span></h4>
+                </div>
+                <div class="panel-body">
+                    <h1>@Model.stats.tenants</h1>
+                    <div class="text-success pull-right">88% <i class="fa fa-level-up"></i></div>
+                    <small>Zone/Tenants</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--states end-->
 
+}else{
 
-<!--states start-->
-<div class="row">
-    <div class="col-md-3 col-sm-6">
-        <div class="panel short-states">
-            <div class="panel-title">
-                <h4> <span class="label label-danger pull-right">Total Visitors</span></h4>
-            </div>
-            <div class="panel-body">
-                <h1>@Model.stats.visitors</h1>
-                <div class="text-danger pull-right">53% <i class="fa fa-bolt"></i></div>
-                <small>Total Visitors</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="panel short-states">
-            <div class="panel-title">
-                <h4> <span class="label label-info pull-right">Registered Staffs</span></h4>
-            </div>
-            <div class="panel-body">
-                <h1>@Model.stats.staffs</h1>
-                <div class="text-info pull-right">65% <i class="fa fa-level-up"></i></div>
-                <small>Registered Staffs</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="panel short-states">
-            <div class="panel-title">
-                <h4> <span class="label label-warning pull-right">Awaiting Appointments</span></h4>
-            </div>
-            <div class="panel-body">
-                <h1>@Model.stats.appointment</h1>
-                <div class="text-warning pull-right">77% <i class="fa fa-level-down"></i></div>
-                <small>Awaiting Appointments</small>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="panel short-states">
-            <div class="panel-title">
-                <h4> <span class="label label-success pull-right">Zone/Tenants</span></h4>
-            </div>
-            <div class="panel-body">
-                <h1>@Model.stats.tenants</h1>
-                <div class="text-success pull-right">88% <i class="fa fa-level-up"></i></div>
-                <small>Zone/Tenants</small>
-            </div>
-        </div>
-    </div>
-</div>
-<!--states end-->
+    <!-- Notification Panel -->
+    <div class="panel">
+        <header class="panel-heading panel-border">
+            <i class="glyphicon glyphicon-volume-up"></i> Notifications
+        </header>
 
-@Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+        <div class="panel-body">
+
+            <!-- display all notifications -->
+            @foreach (var notification in Model.Notifications)
+            {
+                <div class="alert alert-info">
+                    <!-- Display each notification, add a clickable button -->
+                    @notification.Message
+
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <div class="row">
     <div class="col-md-12">

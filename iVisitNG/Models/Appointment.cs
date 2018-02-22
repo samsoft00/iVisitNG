@@ -13,8 +13,6 @@ namespace iVisitNG.Models
 
         public Appointment()
         {
-            //Appointment has many AppointmentDateTime
-            this.AppointmentDateTimes = new List<AppointmentDateTime>();
             //this.VisitorItems = new List<VisitorItem>();
             //this.CheckIns = new List<CheckIns>();
         }
@@ -37,9 +35,18 @@ namespace iVisitNG.Models
         [Required, StringLength(150, MinimumLength = 5)]
 
         public string InstructionToSecurity { get; set; }
+
         public bool ApprovedStatus { get; set; }
+
         public int? FloorNumber { get; set; }
+
         public bool IsGroupVisit { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime DateFrom { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime DateTo { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime CreatedAt { get; set; }
@@ -47,8 +54,9 @@ namespace iVisitNG.Models
         [DataType(DataType.Date)]
         public DateTime UpdateAt { get; set; }
 
+        public string barcode { get; set; }
+
         //public virtual ICollection<CheckIns> CheckIns { get; set; }
-        public virtual ICollection<AppointmentDateTime> AppointmentDateTimes { get; set; }
         //public virtual ICollection<VisitorItem> VisitorItems { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 @using iVisitNG.Views.Manage
 @using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<Staffs> SignInManager
+@inject SignInManager<Staff> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

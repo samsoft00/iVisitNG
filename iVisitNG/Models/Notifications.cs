@@ -20,9 +20,12 @@ namespace iVisitNG.Models
         [Required]
         public bool Enabled { get; set; }
 
-        [Required, ForeignKey("PostedById")]
+        [ForeignKey("PostedById")]
         public Staff PostedBy { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        public string MessageText => Common.StripHtml(this.Message);
+        
     }
 }

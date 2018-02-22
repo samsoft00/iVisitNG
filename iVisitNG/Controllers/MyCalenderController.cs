@@ -33,7 +33,7 @@ namespace iVisitNG.Controllers
                 where (a.StaffId == userId)
                 select new
                 {
-                    a.AppointmentDateTimes,
+                    //a.AppointmentDateTimes,
                     v.FirstName,
                     v.LastName
                 }).ToList();

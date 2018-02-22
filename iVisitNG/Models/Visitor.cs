@@ -43,7 +43,7 @@ namespace iVisitNG.Models
         [Required, StringLength(255)]
         public string OfficeAddress { get; set; }
 
-        [Required, DataType(DataType.ImageUrl)]
+        [DataType(DataType.ImageUrl)]
         public string ImageUrl { get; set; }
 
         public bool IsBlackListed { get; set; }

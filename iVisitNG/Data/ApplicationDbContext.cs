@@ -19,14 +19,22 @@ namespace iVisitNG.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<Country> Country { get; set; }
         public DbSet<BusySchedule> BusySchedule { get; set; }
-        public DbSet<AppointmentDateTime> AppointmentDate { get; set; }
         public DbSet<PurposeOfVisit> PurposeOfVisit { get; set; }
         public DbSet<Division> Division { get; set; }
 
         public DbSet<Staff> Staff { get; set; }
-
+        
         public DbSet<DaysOfWeek> DaysOfWeek { get; set; }
         public DbSet<Notifications> Notification { get; set; }
+
+        //Table collected from Victor
+        public DbSet<ApprovedAppointment> ApprovedAppointment { get; set; }
+        public DbSet<Blacklist> Blacklist { get; set; }
+        public DbSet<BuildingCheck> BuildingCheck { get; set; }
+        public DbSet<FLoorCheck> FLoorCheck { get; set; }
+        public DbSet<JumpFloor> JumpFloor { get; set; }
+        public DbSet<Security> Security { get; set; }
+        public DbSet<VisitorItem> VisitorItem { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -20,6 +20,19 @@ namespace iVisitNG.Models.ManageViewModels
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        [DataType(DataType.ImageUrl)]
+        public string ImagePath { get; set; }
+
+        public int DivisionId { get; set; }
+        public int ZonalOfficeId { get; set; }
+
+        public IEnumerable<Division> Divisions { get; set; }
+
+        public IEnumerable<ZonalOffice> ZonalOffices { get; set; }
+
         public string StatusMessage { get; set; }
     }
 }

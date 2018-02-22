@@ -17,6 +17,8 @@ namespace iVisitNG.Models.ViewModels
         [Display(Name = "Purpose of Visiting")]
         public string Purpose { get; set; }
 
+        public IEnumerable<Notifications> Notifications { get; set; }
+
         public StatisticViewModel stats { get; set; }
     }
 }

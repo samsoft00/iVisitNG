@@ -29,6 +29,10 @@ namespace iVisitNG.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<DateTime>("DateFrom");
+
+                    b.Property<DateTime>("DateTo");
+
                     b.Property<int?>("FloorNumber");
 
                     b.Property<string>("InstructionToSecurity")
@@ -46,6 +50,8 @@ namespace iVisitNG.Data.Migrations
 
                     b.Property<int>("VisitorId");
 
+                    b.Property<string>("barcode");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PurposeOfVisitId");
@@ -57,22 +63,58 @@ namespace iVisitNG.Data.Migrations
                     b.ToTable("Appointment");
                 });
 
-            modelBuilder.Entity("iVisitNG.Models.AppointmentDateTime", b =>
+            modelBuilder.Entity("iVisitNG.Models.ApprovedAppointment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ApproveID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AppointmentId");
+                    b.Property<int>("AppID");
 
-                    b.Property<DateTime>("DateFrom");
+                    b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("DateTo");
+                    b.Property<string>("StaffID");
 
-                    b.HasKey("Id");
+                    b.HasKey("ApproveID");
 
-                    b.HasIndex("AppointmentId");
+                    b.ToTable("ApprovedAppointment");
+                });
 
-                    b.ToTable("AppointmentDate");
+            modelBuilder.Entity("iVisitNG.Models.Blacklist", b =>
+                {
+                    b.Property<int>("blacklistID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Reason");
+
+                    b.Property<string>("StaffID");
+
+                    b.Property<int>("VisitorID");
+
+                    b.HasKey("blacklistID");
+
+                    b.ToTable("Blacklist");
+                });
+
+            modelBuilder.Entity("iVisitNG.Models.BuildingCheck", b =>
+                {
+                    b.Property<int>("CheckID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AppID");
+
+                    b.Property<DateTime>("CheckInTime");
+
+                    b.Property<DateTime?>("CheckOutTime");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Status");
+
+                    b.HasKey("CheckID");
+
+                    b.ToTable("BuildingCheck");
                 });
 
             modelBuilder.Entity("iVisitNG.Models.BusySchedule", b =>
@@ -152,6 +194,46 @@ namespace iVisitNG.Data.Migrations
                     b.ToTable("Divisions");
                 });
 
+            modelBuilder.Entity("iVisitNG.Models.FLoorCheck", b =>
+                {
+                    b.Property<int>("FloorCheckID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AppID");
+
+                    b.Property<DateTime>("CheckInTime");
+
+                    b.Property<DateTime?>("CheckOutTime");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int?>("Floor");
+
+                    b.Property<string>("Status");
+
+                    b.HasKey("FloorCheckID");
+
+                    b.ToTable("FLoorCheck");
+                });
+
+            modelBuilder.Entity("iVisitNG.Models.JumpFloor", b =>
+                {
+                    b.Property<int>("JumpID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AppID");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("NewFloor");
+
+                    b.Property<string>("StaffID");
+
+                    b.HasKey("JumpID");
+
+                    b.ToTable("JumpFloor");
+                });
+
             modelBuilder.Entity("iVisitNG.Models.Notifications", b =>
                 {
                     b.Property<int>("Id")
@@ -220,6 +302,24 @@ namespace iVisitNG.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PurposeOfVisit");
+                });
+
+            modelBuilder.Entity("iVisitNG.Models.Security", b =>
+                {
+                    b.Property<int>("SecID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Password");
+
+                    b.Property<DateTime>("RegDate");
+
+                    b.Property<string>("StaffID");
+
+                    b.Property<string>("Status");
+
+                    b.HasKey("SecID");
+
+                    b.ToTable("Security");
                 });
 
             modelBuilder.Entity("iVisitNG.Models.Staff", b =>
@@ -298,8 +398,7 @@ namespace iVisitNG.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired();
+                    b.Property<string>("ImageUrl");
 
                     b.Property<bool>("IsBlackListed");
 
@@ -324,6 +423,26 @@ namespace iVisitNG.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Visitor");
+                });
+
+            modelBuilder.Entity("iVisitNG.Models.VisitorItem", b =>
+                {
+                    b.Property<int>("itemID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AppID");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("ItemName");
+
+                    b.Property<string>("SerialNumber");
+
+                    b.Property<int>("VisitorID");
+
+                    b.HasKey("itemID");
+
+                    b.ToTable("VisitorItem");
                 });
 
             modelBuilder.Entity("iVisitNG.Models.ZonalOffice", b =>
@@ -463,14 +582,6 @@ namespace iVisitNG.Data.Migrations
                     b.HasOne("iVisitNG.Models.Visitor", "Visitor")
                         .WithMany("Staffs")
                         .HasForeignKey("VisitorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("iVisitNG.Models.AppointmentDateTime", b =>
-                {
-                    b.HasOne("iVisitNG.Models.Appointment", "Appointment")
-                        .WithMany("AppointmentDateTimes")
-                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

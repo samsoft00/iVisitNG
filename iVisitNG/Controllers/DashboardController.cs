@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Vereyon.Web;
 
 namespace iVisitNG.Controllers
 {
@@ -20,7 +19,7 @@ namespace iVisitNG.Controllers
         private readonly UserManager<Staff> _userManager;
         private readonly SignInManager<Staff> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IFlashMessage _flashMessage;
+        //private readonly IFlashMessage _flashMessage;
         private readonly ApplicationDbContext _context;
         private string userId;
 
@@ -28,13 +27,13 @@ namespace iVisitNG.Controllers
             UserManager<Staff> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager,
-            IFlashMessage flashMessage,
+            //IFlashMessage flashMessage,
             SignInManager<Staff> signInManager)
         {
             _userManager = userManager;
             _context = context;
             this._roleManager = roleManager;
-            _flashMessage = flashMessage;
+            //_flashMessage = flashMessage;
             _signInManager = signInManager;
             userId = "";
         }
@@ -53,6 +52,7 @@ namespace iVisitNG.Controllers
             var countries = from c in _context.Country select c;
             var daysOfWeeks = from d in _context.DaysOfWeek select d;
             var purposeOfVisit = from p in _context.PurposeOfVisit select p;
+            var notification = from n in _context.Notification select n;
 
             //get stats
             var stats = new StatisticViewModel()
@@ -73,7 +73,8 @@ namespace iVisitNG.Controllers
                 Countries = countries,
                 Visitors = visitorLists,
                 PurposeOfVisit = purposeOfVisit,
-                stats = stats
+                stats = stats,
+                Notifications = notification
             };
 
             return View(viewModel);

@@ -70,10 +70,6 @@ namespace iVisitNG.Controllers
         {
             if (ModelState.IsValid)
             {
-                Random rand = new Random();
-                var randomNumber = rand.Next(000000, 999999).ToString().Trim();
-
-                //var randomNumber = Enumerable.Range(000000, 999999).OrderBy(g => Guid.NewGuid().GetHashCode());
 
                 var visitor = new Visitor
                 {
@@ -86,7 +82,7 @@ namespace iVisitNG.Controllers
                     OfficeAddress = visitorReg.OfficeAddress,
                     CategoryId = visitorReg.Category,
                     CountryId = visitorReg.Country,
-                    ImageUrl = visitorReg.GetImageUrl(),
+                    //ImageUrl = visitorReg.GetImageUrl(),
                     CreatedDate = DateTime.Now
                 };
 
@@ -173,6 +169,13 @@ namespace iVisitNG.Controllers
             return View(new VisitorRegistrationViewModel(visitor));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> BlackListed()
+        {
+            var blackListedVisitor = await _context.Visitor.Where(m => m.IsBlackListed == true).ToListAsync();
+            return View("blackListed", blackListedVisitor);
+        }
+
         // POST: Visitor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -247,7 +250,7 @@ namespace iVisitNG.Controllers
 
             };
 
-            app.AppointmentDateTimes.Add(appDateTime);
+            //app.AppointmentDateTimes.Add(appDateTime);
 
             _context.Appointment.Add(app);
             _context.SaveChanges();

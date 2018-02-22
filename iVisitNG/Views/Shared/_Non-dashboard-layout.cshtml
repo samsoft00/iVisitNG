@@ -1,33 +1,33 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
-    <title>@ViewBag.Title - IVisit-NG Login</title>
-    <!-- inject:css -->
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <!-- endinject -->
-    <!-- Main Style  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <meta name="description" content="iVisit NG, Visitor Management System">
+    <meta name="author" content="Oyewole Abayomi Samuel">
+    <title>iVisitNG - Department of Petroleum Resources (DPR)</title>
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="~/landing-page/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link href="~/landing-page/css/hybrid.css" rel="stylesheet">
+    <link href="~/landing-page/css/animate.css" rel="stylesheet" type="text/css">
+    <!-- Custom Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <div class="sign-in-wrapper">
-        <div class="sign-container">
-            
-            @RenderBody()
 
-            <div class="text-center copyright-txt login-footer">
-                <small>BrandOne Technologies Limited - Copyright © @DateTime.Now.Year</small>
-            </div>
-        </div>
-    </div>
-    <!-- inject:js -->
-    <script src="~/js/site.min.js"></script>
+    @RenderBody()
 
     <!-- endinject -->
     <!-- Common Script   -->
     @RenderSection("scripts", required: false)
+
 </body>
 </html>

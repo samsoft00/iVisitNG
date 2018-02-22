@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using iVisitNG.Models;
 using iVisitNG.Models.ManageViewModels;
 using iVisitNG.Services;
+using iVisitNG.Data;
 
 namespace iVisitNG.Controllers
 {
@@ -25,6 +26,7 @@ namespace iVisitNG.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ApplicationDbContext _context;
 
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
@@ -33,12 +35,14 @@ namespace iVisitNG.Controllers
           SignInManager<Staff> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
+          ApplicationDbContext context,
           UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
             _urlEncoder = urlEncoder;
         }
 
@@ -48,7 +52,23 @@ namespace iVisitNG.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var user = await _userManager.GetUserAsync(User);
+            //var user = await _userManager.GetUserAsync(User);
+
+            var user = (from s in _context.Staff
+                         join p in _context.StaffProfile on s.Id equals p.StaffId
+                         where (s.Id == _userManager.GetUserId(User))
+                         select new {
+                             s.UserName,
+                             s.Email,
+                             s.PhoneNumber,
+                             s.EmailConfirmed,
+                             p.FirstName,
+                             p.LastName,
+                             p.ImagePath,
+                             p.DivisionId,
+                             p.ZonalOfficeId
+                         }).SingleOrDefault();
+            
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -60,6 +80,11 @@ namespace iVisitNG.Controllers
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ImagePath = user.ImagePath,
+                Divisions = _context.Division.ToList(),
+                ZonalOffices = _context.ZonalOffice.ToList(),
                 StatusMessage = StatusMessage
             };
 
@@ -463,6 +488,9 @@ namespace iVisitNG.Controllers
 
             return View(model);
         }
+
+
+
 
         #region Helpers
 

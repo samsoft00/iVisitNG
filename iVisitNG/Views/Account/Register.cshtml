@@ -4,37 +4,60 @@
     ViewData["Title"] = "Register";
 }
 
-<div class="rows">
-    <div class="col-md-4s">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            
-            <div class="text-center">
-                <h2 class="logo"><img src="@Url.Content("~/Content/vendor/img/dpr.png")" width="150px" alt="" /></h2>
-                <h4>Create a new account.</h4>
-                <hr/>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger alert alert-danger" })
+<!-- Header -->
+<header id="top" class="header">
+    <div class="text-vertical">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <img src="@Url.Content("~/Content/vendor/img/dpr.png")" style="display:block;width:100px" />
+                    <h1>iVisit-NG</h1>
+                    <h2>Department of Petroleum Resources</h2>
+                    <p>Visitors Management System for Department of Petroleum Resources (DPR).</p>
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+
+                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="contactForm">
+
+                        <div class="text-centers">
+                            <!-- <h2 class="logo"><img src="@Url.Content("~/Content/vendor/img/dpr.png")" width="150px" alt="" /></h2> -->
+                            <h2>Register</h2>
+                            <h4>Create a new account.</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger alert alert-danger" })
+                        </div>
+
+                        <!--<div asp-validation-summary="All" class="text-danger alert-danger"></div>-->
+
+                        <div class="form-group">
+                            <label asp-for="Email" class="sr-only control-label"></label>
+                            <input asp-for="Email" class="form-control input-lg" placeholder="Enter valid email" />
+                            <!-- <span asp-validation-for="Email" class="text-danger"></span> -->
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="sr-only control-label"></label>
+                            <input asp-for="Password" class="form-control input-lg" placeholder="Enter valid password" />
+                            <!-- <span asp-validation-for="Password" class="text-danger"></span> -->
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfirmPassword" class="sr-only control-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control input-lg" placeholder="Enter password confirmation" />
+                            <!-- <span asp-validation-for="ConfirmPassword" class="text-danger"></span> -->
+                        </div>
+                        <button type="submit" class="btn btn-lg btn-warning btn-block">Register</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="text-center copyright-txt login-footer">
+                <small>BrandOne Technologies Limited - Copyright © 2018</small>
             </div>
 
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" placeholder="Enter valid email"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" placeholder="Enter valid password"/>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" placeholder="Enter password confirmation"/>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-warning btn-block">Register</button>
-        </form>
+        </div>
     </div>
-</div>
+
+</header>
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

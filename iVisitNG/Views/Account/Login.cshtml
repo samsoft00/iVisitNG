@@ -11,44 +11,70 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="rows">
-    <div class="col-md-4s">
-        <section>
-            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                
-                <div class="text-center">
-                    <h2 class="logo"><img src="@Url.Content("~/Content/vendor/img/dpr.png")" width="150px" alt="" /></h2>
-                    <h4>Login to continue.</h4>
-                    <hr/>
+<!-- Header -->
+<header id="top" class="header">
+    <div class="text-vertical">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <img src="@Url.Content("~/Content/vendor/img/dpr.png")" style="display:block;width:100px" />
+                    <h1>iVisit-NG</h1>
+                    <h2>Department of Petroleum Resources</h2>
+                    <p>Visitors Management System for Department of Petroleum Resources (DPR).</p>
                 </div>
+                <div class="col-md-4 col-md-offset-1">
 
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Enter email address" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" placeholder="Enter password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="RememberMe">
-                            <input asp-for="RememberMe" />
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block">Log in</button>
-                </div>
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" id="contactForm">
 
-            </form>
-        </section>
+                        <h2>Login</h2>
+                        <p>Don’t miss this Great Opportunity</p>
+
+                        <div asp-validation-summary="All" class="text-danger alert-danger"></div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label asp-for="Email" class="sr-only control-label"></label>
+                                <input asp-for="Email" class="form-control input-lg" placeholder="Enter email address" id="email" required data-validation-required-message="Please enter your email address." />
+                                <!-- <span asp-validation-for="Email" class="help-block text-danger"></span> -->
+                            </div>
+                        </div>
+
+                        <div class="row control-group">
+                            <div class="form-group col-lg-12 floating-label-form-group controls">
+                                <label asp-for="Password" class="sr-only control-label"></label>
+                                <input asp-for="Password" class="form-control input-lg" placeholder="Enter password" id="password" required data-validation-required-message="Please enter your password." />
+                                <!-- <span asp-validation-for="Password" class="help-block text-danger"></span> -->
+                            </div>
+                        </div>
+                        <!--
+                        <div class="row control-group">
+                            <div class="checkbox">
+                                <label asp-for="RememberMe">
+                                    <input asp-for="RememberMe" />
+                                    @Html.DisplayNameFor(m => m.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        -->
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+            <div class="text-center copyright-txt login-footer">
+                <small>BrandOne Technologies Limited - Copyright © 2018</small>
+            </div>
+
+        </div>
     </div>
-</div>
+
+</header>
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

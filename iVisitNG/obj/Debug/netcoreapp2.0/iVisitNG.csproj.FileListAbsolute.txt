@@ -1,12 +1,12 @@
+C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.csprojResolveAssemblyReference.cache
+C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.csproj.CoreCompileInputs.cache
+C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.AssemblyInfoInputs.cache
+C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.AssemblyInfo.cs
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\bin\Debug\netcoreapp2.0\iVisitNG.deps.json
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\bin\Debug\netcoreapp2.0\iVisitNG.runtimeconfig.json
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\bin\Debug\netcoreapp2.0\iVisitNG.runtimeconfig.dev.json
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\bin\Debug\netcoreapp2.0\iVisitNG.dll
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\bin\Debug\netcoreapp2.0\iVisitNG.pdb
-C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.csprojResolveAssemblyReference.cache
-C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.csproj.CoreCompileInputs.cache
-C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.AssemblyInfoInputs.cache
-C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.AssemblyInfo.cs
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.dll
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\iVisitNG.pdb
 C:\Users\Samsoft\Documents\Visual Studio 2017\Projects\iVisitNG\iVisitNG\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs

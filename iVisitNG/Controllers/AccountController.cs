@@ -241,24 +241,8 @@ namespace iVisitNG.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
 
-                    var role = new IdentityRole
-                    {
-                        Name = "Administrator",
-                    };
-                    var role1 = new IdentityRole
-                    {
-                        Name = "User",
-                    };
-                    var role2 = new IdentityRole
-                    {
-                        Name = "Security",
-                    };
-                    await _roleManager.CreateAsync(role);
-                    await _roleManager.CreateAsync(role1);
-                    await _roleManager.CreateAsync(role2);
-
                     //Assign Role to user Here      
-                    await _userManager.AddToRoleAsync(user, "Administrator");
+                    await _userManager.AddToRoleAsync(user, "Staff");
 
                     return RedirectToLocal(returnUrl);
                 }

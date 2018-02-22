@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\css\NewFolder\**" />
+    <Content Remove="wwwroot\css\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\css\NewFolder\**" />
+    <None Remove="wwwroot\css\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Data\Migrations\20180105143922_CreateRolesandUsers.cs" />
     <Compile Remove="Data\Migrations\20180105143922_CreateRolesandUsers.Designer.cs" />
     <Compile Remove="Data\Migrations\20180105160052_UpdateDefaultDbTable.cs" />
@@ -16,6 +23,10 @@
     <Compile Remove="Data\Migrations\20180111144625_AddDivisionIdToStaff.Designer.cs" />
     <Compile Remove="Data\Migrations\20180111160943_AddNotification.cs" />
     <Compile Remove="Data\Migrations\20180111160943_AddNotification.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180122115244_updateAppointmentTable.cs" />
+    <Compile Remove="Data\Migrations\20180122115244_updateAppointmentTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180123090525_updateByteArray.cs" />
+    <Compile Remove="Data\Migrations\20180123090525_updateByteArray.Designer.cs" />
   </ItemGroup>
 
 
@@ -24,13 +35,17 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Vereyon.Web.FlashMessageCore" Version="1.0.0" />
+    <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="2.3.8" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\landing-page\" />
   </ItemGroup>
   <Target Name="MyPreCompileTarget" BeforeTargets="Build">
 	<Exec Command="gulp min" />

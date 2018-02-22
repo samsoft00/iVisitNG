@@ -29,7 +29,7 @@ namespace iVisitNG
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("iVisitNGConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("iVisitNGConnectionn")));
 
             services.AddIdentity<Staff, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -37,7 +37,7 @@ namespace iVisitNG
             
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<Vereyon.Web.IFlashMessage, Vereyon.Web.FlashMessage>();
+            //services.AddScoped<Vereyon.Web.IFlashMessage, Vereyon.Web.FlashMessage>();
 
             // Add MVC services to the services container.
             services.AddMvc();
@@ -51,7 +51,7 @@ namespace iVisitNG
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider provider)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +76,53 @@ namespace iVisitNG
                     name: "default",
                     template: "{controller=Dashboard}/{action=Index}/{id?}");
             });
+
+            CreateRoles(provider).Wait();
+        }
+
+        //The method below create roles
+        private async Task CreateRoles(IServiceProvider provider)
+        {
+            var RoleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = provider.GetRequiredService<UserManager<Staff>>();
+
+            string[] roleNames = { "Admin", "Staff", "Security" };
+
+            IdentityResult roleResult;
+
+            foreach(var roleName in roleNames)
+            {
+                //creating the roles and seeding them to the database
+                var roleExist = await RoleManager.RoleExistsAsync(roleName);
+
+                if (!roleExist){
+                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                }
+
+            }
+
+            string username = Configuration.GetSection("UserSettings")["UserEmail"];
+            string password = Configuration.GetSection("UserSettings")["UserPassword"];
+
+            //creating a super user who will maintain the application
+            var powerUser = new Staff
+            {
+                UserName = username,
+                Email = username
+            };
+
+            var _user = await UserManager.FindByEmailAsync(Configuration.GetSection("UserSettings")["UserEmail"]);
+            if(_user == null)
+            {
+                var createPowerUser = await UserManager.CreateAsync(powerUser, password);
+                if (createPowerUser.Succeeded)
+                {
+                    //here we tie the new user to the Admin role
+                    await UserManager.AddToRoleAsync(powerUser, "Admin");
+                }
+            }
+
+
         }
     }
 }

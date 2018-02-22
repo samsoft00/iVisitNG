@@ -10,7 +10,6 @@ using iVisitNG.Models;
 using iVisitNG.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Vereyon.Web;
 
 namespace iVisitNG.Controllers
 {
@@ -19,14 +18,11 @@ namespace iVisitNG.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Staff> _userManager;
-        private readonly IFlashMessage _flashMessage;
 
-        public ProfileController(ApplicationDbContext context, UserManager<Staff> userManager,
-            IFlashMessage flashMessage)
+        public ProfileController(ApplicationDbContext context, UserManager<Staff> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _flashMessage = flashMessage;
         }
 
         // GET: Profiles
@@ -114,7 +110,7 @@ namespace iVisitNG.Controllers
                 }
                 
                 await _context.SaveChangesAsync();
-                _flashMessage.Confirmation("Profile Update Successfully!");
+                //_flashMessage.Confirmation("Profile Update Successfully!");
 
                 return RedirectToRoute("Dashboard");
             }
